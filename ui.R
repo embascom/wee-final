@@ -67,7 +67,7 @@ trait_page <- tabPanel(
 
 # Define content for the third page
 page_three <- tabPanel(
-  "NAME", # label for the tab in the navbar
+  "Page 3", # label for the tab in the navbar
   includeCSS("style_1.css"),
   div(id = "container",
     # img(src = "logo.png", id = "logo"),
@@ -97,7 +97,7 @@ page_three <- tabPanel(
 
 # Define content for the fourth page
 page_four <- tabPanel(
-  "NAME" # label for the tab in the navbar
+  "Page 4" # label for the tab in the navbar
   # ...more content would go here...
 )
 

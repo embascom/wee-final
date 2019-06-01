@@ -31,7 +31,6 @@ my_ui <- fluidPage(
       highchartOutput("map")
     )
   )
-
 )
 
 my_server <- function(input, output) {
