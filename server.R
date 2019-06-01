@@ -1,61 +1,14 @@
 library(shiny)
 library(dplyr)
 library(plotly)  
+library(highcharter)
 
 olympic_data <- read.csv("data/olympic.csv", header = TRUE, stringsAsFactors = FALSE)
 olympic_data <- na.omit(olympic_data)
 unique_sports <- select(olympic_data, Sport) %>% distinct()
+filtered_data <- olympic_data[olympic_data$Sport  !=  "Art Competitons" & olympic_data$Sport  !=  "Larcrosse"
+                              & olympic_data$Sport  !=  "Golf", ]
 
-# Define UI for application that renders the map and table
-my_ui <- fluidPage(
-  navbarPage("Menu",
-             
-    # Add Main Page
-    tabPanel("Athelete Traits and Medals Won",
-      includeCSS("style_1.css"), 
-      div(id = "container",
-        img(src = "logo.png", id = "logo"),
-        
-        # Application title
-        titlePanel("Athelete Traits and Medals Won"), # Title of the app
-        
-        # Sidebar with a selectInput for the variable for analysis
-        sidebarLayout(
-          sidebarPanel(
-            selectInput( # Widget 1: Shape selections 
-              inputId = "sport",
-              label = "Sports",
-              choices = unique_sports
-            ),
-            selectInput( # Widget 1: Shape selections 
-              inputId = "trait",
-              label = "Traits",
-              selected = "Height",
-              choices = c("Age", "Height", "Weight")
-            ),
-            div(id = "note", # Adding Note
-                p("This bar chart helps to explore relationships between atheletes' physical traits and medals won in all Olympic games")  
-            )
-          ),
-          
-          mainPanel(
-            plotlyOutput("chart") # reactive output provided by leaflet
-          )
-        )
-      )
-    ),
-    
-    # Add Summary Page
-    tabPanel("Summary",
-      sidebarLayout(
-        sidebarPanel(),
-        mainPanel()
-      )
-    )
-  )
-)
-
-# Define server that renders a map and a table
 my_server <- function(input, output) {
   data_reactive <- reactive({ 
     if(input$trait == "trait") {
@@ -117,6 +70,15 @@ my_server <- function(input, output) {
              yaxis = list(title = "Medals Won")) 
     
   })
+  
+  output$map <- renderHighchart({
+    data_for_the_sport <- filtered_data %>% filter(Sport == input$sports) %>% select(Team, Medal) %>% 
+      filter(Medal == input$Medal)
+    table <- data.frame(table(data_for_the_sport))
+    dem_viz <- hcmap('custom/world', data = data_for_the_sport, 
+                     name = paste0(input$Medal, " Medal of the ", input$Medal), 
+                     value = table$Freq, borderColor = "black", joinBy = c("name", "Team")) %>%
+      hc_colorAxis(dataClasses = color_classes(c(seq(0, 100, by = 20)), colors = c("#ADD8E6", "#0000ff")))
+  })
+  
 }
-
-shinyApp(ui = my_ui, server = my_server)
