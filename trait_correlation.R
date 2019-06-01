@@ -8,32 +8,48 @@ unique_sports <- select(olympic_data, Sport) %>% distinct()
 
 # Define UI for application that renders the map and table
 my_ui <- fluidPage(
-  includeCSS("style_1.css"), 
-  div(id = "container",
-    img(src = "logo.png", id = "logo"),
-    # Application title
-    titlePanel("Athelete Traits and Medals Won"), # Title of the app
-    
-    # Sidebar with a selectInput for the variable for analysis
-    sidebarLayout(
-      sidebarPanel(
-        selectInput( # Widget 1: Shape selections 
-          inputId = "sport",
-          label = "Sports",
-          choices = unique_sports
-        ),
-        selectInput( # Widget 1: Shape selections 
-          inputId = "trait",
-          label = "Traits",
-          selected = "Height",
-          choices = c("Age", "Height", "Weight")
-        ),
-        div(id = "note", # Adding Note
-            p("This bar chart helps to explore relationships between atheletes' physical traits and medals won in all Olympic games")  
+  navbarPage("Menu",
+             
+    # Add Main Page
+    tabPanel("Main Page",
+      includeCSS("style_1.css"), 
+      div(id = "container",
+        img(src = "logo.png", id = "logo"),
+        
+        # Application title
+        titlePanel("Athelete Traits and Medals Won"), # Title of the app
+        
+        # Sidebar with a selectInput for the variable for analysis
+        sidebarLayout(
+          sidebarPanel(
+            selectInput( # Widget 1: Shape selections 
+              inputId = "sport",
+              label = "Sports",
+              choices = unique_sports
+            ),
+            selectInput( # Widget 1: Shape selections 
+              inputId = "trait",
+              label = "Traits",
+              selected = "Height",
+              choices = c("Age", "Height", "Weight")
+            ),
+            div(id = "note", # Adding Note
+                p("This bar chart helps to explore relationships between atheletes' physical traits and medals won in all Olympic games")  
+            )
+          ),
+          
+          mainPanel(
+            plotlyOutput("chart") # reactive output provided by leaflet
+          )
         )
-      ),
-      mainPanel(
-        plotlyOutput("chart") # reactive output provided by leaflet
+      )
+    ),
+    
+    # Add Summary Page
+    tabPanel("Summary",
+      sidebarLayout(
+        sidebarPanel(),
+        mainPanel()
       )
     )
   )
