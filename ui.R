@@ -27,7 +27,11 @@ main_page <- tabPanel(
         1896 Athens to 2016 Rio Olympic games. The data was collected by Randi H. Griffin, a data scientist and a lecturer at the 
         Northeastern University. He scraped historical olympic records from sports-reference.com, a company based in Pennsylvania, 
         that delivers sports statistics. Their primary data providers are Gracenote, Sportradar, and Delta Sports Group. You can
-        get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results"))
+        get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results")),
+      h2("Visualizations"),
+      p("Traits: This page explores the relationship between atheletes' traits and the total number of medals won."),
+      p("Page 2: "),
+      p("Page 3: ")
     )    
   )
 )
