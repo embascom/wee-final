@@ -11,7 +11,7 @@ my_ui <- fluidPage(
   navbarPage("Menu",
              
     # Add Main Page
-    tabPanel("Main Page",
+    tabPanel("Athelete Traits and Medals Won",
       includeCSS("style_1.css"), 
       div(id = "container",
         img(src = "logo.png", id = "logo"),
