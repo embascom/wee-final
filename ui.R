@@ -23,10 +23,11 @@ main_page <- tabPanel(
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
       h2("Dataset"),
-      p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      p("The dataset that was used for this project contains information about all the athletes and results from the 
+        1896 Athens to 2016 Rio Olympic games. The data was collected by Randi H. Griffin, a data scientist and a lecturer at the 
+        Northeastern University. He scraped historical olympic records from sports-reference.com, a company based in Pennsylvania, 
+        that delivers sports statistics. Their primary data providers are Gracenote, Sportradar, and Delta Sports Group. You can
+        get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results"))
     )    
   )
 )
@@ -46,6 +47,7 @@ trait_page <- tabPanel(
           selectInput( # Widget 1: Shape selections 
             inputId = "sport",
             label = "Sports",
+            selected = "Swimming",
             choices = unique_sports
           ),
           selectInput( # Widget 1: Shape selections 
@@ -61,6 +63,13 @@ trait_page <- tabPanel(
         mainPanel(
           plotlyOutput("chart") # reactive output provided by leaflet
         )
+      ),
+      div(id = "content",
+          h2("Description and Analysis"),
+          p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
       )
   )
 )
@@ -91,6 +100,13 @@ page_three <- tabPanel(
       mainPanel(
         highchartOutput("map")
       )
+    ),
+    div(id = "content",
+        h2("Description and Analysis"),
+        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
     )
   )
 )
