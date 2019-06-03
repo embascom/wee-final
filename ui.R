@@ -29,9 +29,9 @@ main_page <- tabPanel(
         that delivers sports statistics. Their primary data providers are Gracenote, Sportradar, and Delta Sports Group. You can
         get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results")),
       h2("Visualizations"),
-      p("Traits: This page explores the relationship between atheletes' traits and the total number of medals won."),
-      p("Countries: This page displays the the number of medals won by each country. *takes time to load*"),
-      p("Athletes: ")
+      p("Countries: This page displays the the number of medals won by each country. *takes time to load*", br(),
+      "Athletes:",br(), 
+      "Traits: This page explores the relationship between atheletes' traits and the total number of medals won.")
     )    
   )
 )
@@ -59,9 +59,6 @@ trait_page <- tabPanel(
             label = "Traits",
             selected = "Height",
             choices = c("Age", "Height", "Weight")
-          ),
-          div(id = "note", # Adding Note
-              p("This bar chart helps to explore relationships between athletes' physical traits and medals won in all Olympic games")  
           )
         ),
         mainPanel(
@@ -69,11 +66,10 @@ trait_page <- tabPanel(
         )
       ),
       div(id = "content",
-          h2("Description and Analysis"),
-          p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+          p("This bar chart helps to explore relationships between athletes' physical traits and medals won in all Olympic games.
+            Though it is difficult to claim and justify correlations with high certainty for the given physical traits and Olympic games, this
+            chart provides a valuable insight into how a certain physical characteristic may have helped in athletes' performance in winning
+            their Olympic medals.")
       )
   )
 )
@@ -128,7 +124,6 @@ page_three <- tabPanel(
       )
     ),
     div(id = "content",
-        h2("Description and Analysis"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
