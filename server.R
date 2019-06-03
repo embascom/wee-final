@@ -134,7 +134,7 @@ my_server <- function(input, output) {
       View(sports_country_medal)
     } 
     sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country, 
-                               color = ~Medals, size = ~Medals) %>% 
+                               color = ~Medals, size = ~Medals, type = "scatter") %>% 
       layout(title = "NUmber of Sports Versus Amount of Medals Won")
   })
   
