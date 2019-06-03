@@ -30,7 +30,7 @@ main_page <- tabPanel(
         get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results")),
       h2("Visualizations"),
       p("Traits: This page explores the relationship between atheletes' traits and the total number of medals won."),
-      p("Page 2: "),
+      p("Country and Medal: This page displays the the number of medals won by each country."),
       p("Page 3: ")
     )    
   )
@@ -80,36 +80,33 @@ trait_page <- tabPanel(
 
 # Define content for the third page
 page_three <- tabPanel(
-  "Page 3", # label for the tab in the navbar
+  "Number of Medal won by country", # label for the tab in the navbar
   includeCSS("style_1.css"),
   div(id = "container",
     # img(src = "logo.png", id = "logo"),
-    titlePanel("The relationship between Height and medals won"),
+    titlePanel("Country and Medal Won"),
     
+    highchartOutput("overview_map"),
     sidebarLayout(
       sidebarPanel(
-        selectInput("sports", 
+        selectInput("sports",
                     label = h3("Select a Sport:"),
                     choices = unique(filtered_data$Sport)
         ),
-        selectInput("Medal", 
-                    label = h3("Select a Medal Type:"),
-                    choices = unique(filtered_data$Medal)
-        ),
         div(id = "note", # Adding Note
-            p("This bar chart helps to explore relationships between atheletes' physical traits and medals won in all Olympic games")  
+            p("This bar chart helps to explore relationships between atheletes' physical traits and medals won in all Olympic games")
         )
       ),
-      
+
       mainPanel(
         highchartOutput("map")
       )
     ),
     div(id = "content",
         h2("Description and Analysis"),
-        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
           occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
     )
   )
