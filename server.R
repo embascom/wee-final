@@ -134,10 +134,6 @@ my_server <- function(input, output) {
       layout(title = "NUmber of Sports Versus Amount of Medals Won")
   })
   
-  # output$hover <- renderPrint()
-  
-  
-  
   # Generate a map that maps the number of medal won by each country.
   output$map <- renderHighchart({
     data_for_the_sport <- olympic_data %>% filter(Sport == input$sports) %>% select(Team)
