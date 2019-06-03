@@ -10,9 +10,16 @@ unique_sports <- select(olympic_data, Sport) %>% distinct()
 # Exclude sports with few data
 filtered_data <- olympic_data[olympic_data$Sport  !=  "Art Competitons" & olympic_data$Sport  !=  "Larcrosse"
                               & olympic_data$Sport  !=  "Golf", ]
+
 # Find the start year and end year of the games in dataset
 start_year <- min(filtered_data$Year)
 end_year <- max(filtered_data$Year)
+
+
+# Revise team name in order to match the country name for the map
+filtered_data$Team <- replace(filtered_data$Team, filtered_data$Team == "United States" | 
+                                filtered_data$Team == "United States-1" | filtered_data$Team == "United States-2",
+                                   "United States of America")
 
 my_server <- function(input, output) {
   data_reactive <- reactive({ 
@@ -78,14 +85,17 @@ my_server <- function(input, output) {
   
   # Generate a map that maps the total number of medal won by each country.
   output$overview_map <- renderHighchart({
-    country_and_medals <- data.frame(table(select(filtered_data, Team)))
+    country_and_medals <- select(filtered_data, Team)
+    
+    country_and_medals <- data.frame(table(country_and_medals))
+    
     colnames(country_and_medals) <- c("Country", "Freq")
     max_freq <- max(country_and_medals$Freq)
     Overview_map <- hcmap('custom/world', data = country_and_medals, 
                           name = paste0("The amount of medal won between ", start_year, " and ", end_year), 
-                          value = country_and_medals$Freq, borderColor = "black", joinBy = c("name", "Country")) %>%
+                          value = "Freq", borderColor = "black", joinBy = c("name", "Country")) %>%
       hc_colorAxis(dataClasses = color_classes(c(0, 10, 50, 100, 500, 1000, 2000, 3000, 4000, 5000), 
-                                               colors = c("#ADD8E6", "#0000ff")))
+                                               colors = c("#ADD8E6", "#ef3674")))
   })
   
   # Generate a map that maps the number of medal won by each country.
