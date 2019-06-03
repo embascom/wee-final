@@ -86,9 +86,7 @@ my_server <- function(input, output) {
   # Generate a map that maps the total number of medal won by each country.
   output$overview_map <- renderHighchart({
     country_and_medals <- select(filtered_data, Team)
-    
     country_and_medals <- data.frame(table(country_and_medals))
-    
     colnames(country_and_medals) <- c("Country", "Freq")
     max_freq <- max(country_and_medals$Freq)
     Overview_map <- hcmap('custom/world', data = country_and_medals, 
@@ -100,12 +98,14 @@ my_server <- function(input, output) {
   
   # Generate a map that maps the number of medal won by each country.
   output$map <- renderHighchart({
-    data_for_the_sport <- filtered_data %>% filter(Sport == input$sports) %>% select(Team, Medal)
+    data_for_the_sport <- filtered_data %>% filter(Sport == input$sports) %>% select(Team)
     table <- data.frame(table(data_for_the_sport$Team))
-    map_viz <- hcmap('custom/world', data = data_for_the_sport, 
-                     name = paste0(input$Medal, " Medal of the ", input$Medal), 
-                     value = table$Freq, borderColor = "black", joinBy = c("name", "Team")) %>%
-      hc_colorAxis(dataClasses = color_classes(c(seq(0, 100, by = 20)), colors = c("#ADD8E6", "#0000ff")))
+    colnames(table) <- c("Country", "Freq")
+    map_viz <- hcmap('custom/world', data = table, 
+                     name = paste0("Number of Medal for ", input$sports), 
+                     value = "Freq", borderColor = "black", joinBy = c("name", "Country")) %>%
+      hc_colorAxis(dataClasses = color_classes(c(seq(0, max(table$Freq), by = max(table$Freq)/5)), 
+                                               colors = c("#ADD8E6", "#0000ff")))
   })
   
 }

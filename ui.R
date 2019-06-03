@@ -78,7 +78,7 @@ trait_page <- tabPanel(
   )
 )
 
-# Define content for the third page
+# Define content for the third page: Analysis of Number of Medal won by country
 page_three <- tabPanel(
   "Number of Medal won by country", # label for the tab in the navbar
   includeCSS("style_1.css"),
@@ -94,7 +94,7 @@ page_three <- tabPanel(
                     choices = unique(filtered_data$Sport)
         ),
         div(id = "note", # Adding Note
-            p("This bar chart helps to explore relationships between atheletes' physical traits and medals won in all Olympic games")
+            p(paste0("The map displays the number of medals won by countries for the sport selected."))
         )
       ),
 
