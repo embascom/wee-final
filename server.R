@@ -117,8 +117,7 @@ my_server <- function(input, output) {
   })
   
   # Generate a scatter plot that shows the number of sports paticipated and the number of medal won.
-  output$sport_and_medal <- renderPlot({
-    
+  output$sport_and_medal <- renderPlotly({
     # Join "country_and_medals" and "sports_and_country" by country name
     sports_country_medal <- sports_and_country_summary
     sports_country_medal$medals <- "0"
@@ -130,9 +129,13 @@ my_server <- function(input, output) {
     }
     sports_country_medal$medals <- as.numeric(sports_country_medal$medals)
     colnames(sports_country_medal) <- c("Country", "Sports", "Medals")
-    sport_and_medal <- ggplot(sports_country_medal, aes(x = sports_country_medal$Sports, y = sports_country_medal$Medals)) +
-      geom_point(size = 2, color = "black") + xlab("Sports") + ylab("Medals")
-    sport_and_medal
+    if (input$checkbox) {
+      sports_country_medal$Medals <- log(sports_country_medal$Sports, 10)
+      View(sports_country_medal)
+    } 
+    sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country, 
+                               color = ~Medals, size = ~Medals) %>% 
+      layout(title = "NUmber of Sports Versus Amount of Medals Won")
   })
   
   # Generate a map that maps the number of medal won by each country.

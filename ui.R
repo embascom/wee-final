@@ -108,6 +108,7 @@ page_three <- tabPanel(
         p("The above graph demonstrated the relationship between the number of sports a given country participates in and how
           many medals they have won.")
         ),
+
     
     h3("Number of Medal Won by Sport"),
     sidebarLayout(
