@@ -5,9 +5,9 @@ library(highcharter)
 
 olympic_data <- read.csv("data/olympic.csv", header = TRUE, stringsAsFactors = FALSE)
 olympic_data <- na.omit(olympic_data)
-filtered_data <- olympic_data[olympic_data$Sport  !=  "Art Competitons" & olympic_data$Sport  !=  "Larcrosse"
-                              & olympic_data$Sport  !=  "Golf", ]
-unique_sports <- select(olympic_data, Sport) %>% distinct()
+filtered_data <- olympic_data[olympic_data$Sport != "Art Competitions" & olympic_data$Sport != "Lacrosse"
+                              & olympic_data$Sport != "Golf", ]
+unique_sports <- select(filtered_data, Sport) %>% distinct()
 
 # Define the first page content
 main_page <- tabPanel(

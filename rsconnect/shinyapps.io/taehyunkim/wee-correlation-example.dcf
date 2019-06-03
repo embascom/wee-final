@@ -1,0 +1,13 @@
+name: wee-correlation-example
+title: wee-correlation-example
+username:
+account: taehyunkim
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 959957
+bundleId: 2123861
+url: https://taehyunkim.shinyapps.io/wee-correlation-example/
+when: 1559426336.6186
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: map.R

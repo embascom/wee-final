@@ -22,7 +22,6 @@ data_cleaning <- function(dataset) {
 
 olympic_data <- data_cleaning(na.omit(original_data))
 with_nonmedal_record <- data_cleaning(original_data)
-unique_sports <- select(olympic_data, Sport) %>% distinct()
 
 # Find the start year and end year of the games in dataset
 start_year <- min(olympic_data$Year)
@@ -39,13 +38,9 @@ colnames(sports_and_country_summary) <- c("Country", "Freq")
 
 my_server <- function(input, output) {
   data_reactive <- reactive({ 
-    if(input$trait == "trait") {
-      olympic_data %>% filter(Sport == input$sport) 
-    } else {
-      olympic_data %>% filter(Sport == input$sport) 
-    }
+    olympic_data %>% filter(Sport == input$sport) 
   })
-  
+
   output$chart <- renderPlotly({
     olympic_data <- data_reactive()
     trait <- 0
