@@ -103,6 +103,7 @@ page_three <- tabPanel(
     ),
     
     h3("Relationship between the number of sports and the number of medal won"),
+    checkboxInput("checkbox", label = "Log version"),
     plotlyOutput("sport_and_medal"),
     
     h3("Number of Medal Won in Different Sports"),

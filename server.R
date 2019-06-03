@@ -129,6 +129,10 @@ my_server <- function(input, output) {
     }
     sports_country_medal$medals <- as.numeric(sports_country_medal$medals)
     colnames(sports_country_medal) <- c("Country", "Sports", "Medals")
+    if (input$checkbox) {
+      sports_country_medal$Medals <- log(sports_country_medal$Sports, 10)
+      View(sports_country_medal)
+    } 
     sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country, 
                                color = ~Medals, size = ~Medals) %>% 
       layout(title = "NUmber of Sports Versus Amount of Medals Won")
