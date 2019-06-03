@@ -31,7 +31,7 @@ main_page <- tabPanel(
       h2("Visualizations"),
       p("Traits: This page explores the relationship between atheletes' traits and the total number of medals won."),
       p("Country and Medal: This page displays the the number of medals won by each country."),
-      p("Page 3: ")
+      p("Page 4: ")
     )    
   )
 )
@@ -86,8 +86,24 @@ page_three <- tabPanel(
     # img(src = "logo.png", id = "logo"),
     titlePanel("Country and Medal Won"),
     
-    h3("Country and total medal won from year 1896 to 2016"),
+    h3("Country and total number of medal won from year 1896 to 2016"),
     highchartOutput("overview_map"),
+    div(id = "content",
+        p("The Map displays the total number of medals won. From the graph, we know United States won the most medals(4357).
+          The number of medal won is ranged from 0 to 4357. There is a huge difference between the number of medals won in 
+          differenct countried. One possible guess is that some countries are participating in more sports than other countries.
+          Also, some countries might join Olympic game later than other countries.Let's examine the realtionship between the 
+          number of medals won and the number of sports the country participated in.")),
+    
+    h3("Number of sports' types participated by each country"),
+    highchartOutput("sports_map"),
+    div(id = "content",
+        p("From the graph above, countries that won more medals tend to have participated in more type of sports. However, 
+          participating in more sports does not guarantee more medals won. ")
+    ),
+    
+    h3("Relationship between the number of sports and the number of medal won"),
+    plotOutput("sport_and_medal"),
     
     h3("Number of Medal Won in Different Sports"),
     sidebarLayout(
@@ -97,7 +113,7 @@ page_three <- tabPanel(
                     choices = unique(filtered_data$Sport)
         ),
         div(id = "note", # Adding Note
-            p(paste0("The map displays the number of medals won by countries for the sport selected."))
+            p("The map displays the number of medals won by countries for the sport selected.")
         )
       ),
 
