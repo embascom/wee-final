@@ -102,13 +102,14 @@ page_three <- tabPanel(
           participating in more sports does not guarantee more medals won. ")
     ),
     
+
     h3("Relationship Between Sports and Medals Won"),
-    plotOutput("sport_and_medal"),
+    checkboxInput("checkbox", label = "Log version"),
+    plotlyOutput("sport_and_medal"),
     div(id = "content",
         p("The above graph demonstrated the relationship between the number of sports a given country participates in and how
           many medals they have won.")
         ),
-
     
     h3("Number of Medal Won by Sport"),
     sidebarLayout(
