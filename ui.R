@@ -5,9 +5,9 @@ library(highcharter)
 
 olympic_data <- read.csv("data/olympic.csv", header = TRUE, stringsAsFactors = FALSE)
 olympic_data <- na.omit(olympic_data)
-unique_sports <- select(olympic_data, Sport) %>% distinct()
 filtered_data <- olympic_data[olympic_data$Sport  !=  "Art Competitons" & olympic_data$Sport  !=  "Larcrosse"
                               & olympic_data$Sport  !=  "Golf", ]
+unique_sports <- select(olympic_data, Sport) %>% distinct()
 
 # Define the first page content
 main_page <- tabPanel(
@@ -86,7 +86,10 @@ page_three <- tabPanel(
     # img(src = "logo.png", id = "logo"),
     titlePanel("Country and Medal Won"),
     
+    h3("Country and total medal won from year 1896 to 2016"),
     highchartOutput("overview_map"),
+    
+    h3("Number of Medal Won in Different Sports"),
     sidebarLayout(
       sidebarPanel(
         selectInput("sports",

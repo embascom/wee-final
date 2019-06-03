@@ -3,23 +3,24 @@ library(dplyr)
 library(plotly)  
 library(highcharter)
 
-olympic_data <- read.csv("data/olympic.csv", header = TRUE, stringsAsFactors = FALSE)
-olympic_data <- na.omit(olympic_data)
-unique_sports <- select(olympic_data, Sport) %>% distinct()
+original_data <- read.csv("data/olympic.csv", header = TRUE, stringsAsFactors = FALSE)
+olympic_data <- na.omit(original_data)
 
 # Exclude sports with few data
 filtered_data <- olympic_data[olympic_data$Sport  !=  "Art Competitons" & olympic_data$Sport  !=  "Larcrosse"
                               & olympic_data$Sport  !=  "Golf", ]
+unique_sports <- select(olympic_data, Sport) %>% distinct()
 
 # Find the start year and end year of the games in dataset
 start_year <- min(filtered_data$Year)
 end_year <- max(filtered_data$Year)
 
+# Remove non alphabetic character and non space character in data
+filtered_data$Team <- gsub("(-[0-9])$", "", filtered_data$Team)
 
 # Revise team name in order to match the country name for the map
-filtered_data$Team <- replace(filtered_data$Team, filtered_data$Team == "United States" | 
-                                filtered_data$Team == "United States-1" | filtered_data$Team == "United States-2",
-                                   "United States of America")
+filtered_data$Team <- replace(filtered_data$Team, filtered_data$Team == "United States", "United States of America")
+
 
 my_server <- function(input, output) {
   data_reactive <- reactive({ 
