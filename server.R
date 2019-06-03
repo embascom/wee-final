@@ -125,8 +125,9 @@ my_server <- function(input, output) {
     sports_country_medal$medals <- as.numeric(sports_country_medal$medals)
     colnames(sports_country_medal) <- c("Country", "Sports", "Medals")
     if (input$checkbox) {
-      sports_country_medal$Medals <- log(sports_country_medal$Sports, 10)
-      View(sports_country_medal)
+      sports_country_medal$Sports <- log(sports_country_medal$Sports, 10)
+      sports_country_medal$Medals <- log(sports_country_medal$Medals, 10)
+      sports_country_medal$Medals <- replace(sports_country_medal$Medals, sports_country_medal$Medals == "-Inf", 0)
     } 
     sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country, 
                                color = ~Medals, size = ~Medals, type = "scatter") %>% 

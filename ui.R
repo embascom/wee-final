@@ -1,8 +1,6 @@
-library(PKI) # Library only for publish
 library(shiny)
 library(dplyr)
 library(plotly)
-library(RJSONIO) # Library only for publish
 library(highcharter)
 
 olympic_data <- read.csv("data/olympic.csv", header = TRUE, stringsAsFactors = FALSE)
