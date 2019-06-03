@@ -103,7 +103,8 @@ page_three <- tabPanel(
     ),
     
     h3("Relationship between the number of sports and the number of medal won"),
-    plotOutput("sport_and_medal"),
+    plotlyOutput("sport_and_medal"),
+    # verbatimTextOutput("hover"),
     
     h3("Number of Medal Won in Different Sports"),
     sidebarLayout(
