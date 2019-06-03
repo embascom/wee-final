@@ -80,13 +80,13 @@ trait_page <- tabPanel(
 
 # Define content for the third page: Analysis of Number of Medal won by country
 page_three <- tabPanel(
-  "Number of Medal won by country", # label for the tab in the navbar
+  "Countries", # label for the tab in the navbar
   includeCSS("style_1.css"),
   div(id = "container",
     # img(src = "logo.png", id = "logo"),
-    titlePanel("Country and Medal Won"),
+    titlePanel("Country Participation Information and Medals Won"),
     
-    h3("Country and total number of medal won from year 1896 to 2016"),
+    h3("Total Number of Medals Won by Country from 1896 to 2016"),
     highchartOutput("overview_map"),
     div(id = "content",
         p("The Map displays the total number of medals won. From the graph, we know United States won the most medals(4357).
@@ -95,17 +95,21 @@ page_three <- tabPanel(
           Also, some countries might join Olympic game later than other countries.Let's examine the realtionship between the 
           number of medals won and the number of sports the country participated in.")),
     
-    h3("Number of sports' types participated by each country"),
+    h3("Number of Sports Participated in by Country"),
     highchartOutput("sports_map"),
     div(id = "content",
         p("From the graph above, countries that won more medals tend to have participated in more type of sports. However, 
           participating in more sports does not guarantee more medals won. ")
     ),
     
-    h3("Relationship between the number of sports and the number of medal won"),
+    h3("Relationship Between Sports and Medals Won"),
     plotOutput("sport_and_medal"),
+    div(id = "content",
+        p("The above graph demonstrated the relationship between the number of sports a given country participates in and how
+          many medals they have won.")
+        ),
     
-    h3("Number of Medal Won in Different Sports"),
+    h3("Number of Medal Won by Sport"),
     sidebarLayout(
       sidebarPanel(
         selectInput("sports",
@@ -133,7 +137,7 @@ page_three <- tabPanel(
 
 # Define content for the fourth page
 page_four <- tabPanel(
-  "Page 4" # label for the tab in the navbar
+  "Athletes" # label for the tab in the navbar
   # ...more content would go here...
 )
 
@@ -142,7 +146,7 @@ ui <- fluidPage(
   includeCSS("style_1.css"),
   div(id = "mainHeader",
     img(src = "logo.png", id = "logo"),
-    titlePanel("TITLE TITLE TITLE TITLE") # show with a displayed title
+    titlePanel("THE OLYMPIC GAMES") # show with a displayed title
   ),
   navbarPage(
     "GROUP WEE", # application title
