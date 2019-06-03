@@ -30,8 +30,8 @@ main_page <- tabPanel(
         get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results")),
       h2("Visualizations"),
       p("Traits: This page explores the relationship between atheletes' traits and the total number of medals won."),
-      p("Country and Medal: This page displays the the number of medals won by each country."),
-      p("Page 4: ")
+      p("Countries: This page displays the the number of medals won by each country. *takes time to load*"),
+      p("Athletes: ")
     )    
   )
 )
@@ -61,7 +61,7 @@ trait_page <- tabPanel(
             choices = c("Age", "Height", "Weight")
           ),
           div(id = "note", # Adding Note
-              p("This bar chart helps to explore relationships between atheletes' physical traits and medals won in all Olympic games")  
+              p("This bar chart helps to explore relationships between athletes' physical traits and medals won in all Olympic games")  
           )
         ),
         mainPanel(
@@ -153,8 +153,8 @@ ui <- fluidPage(
   navbarPage(
     "GROUP WEE", # application title
     main_page,         # include the first page content
-    trait_page,         # include the second page content
-    page_three,  # include the third page content
-    page_four  # include the four page content
+    page_three,  # include the second page content
+    page_four,  # include the third page content
+    trait_page       # include the fourth page content
   )
 )
