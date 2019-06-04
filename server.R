@@ -89,7 +89,7 @@ my_server <- function(input, output) {
     } else {
       xTitle <- "Weight (kg)"
     }
-    # Generate bar chart for athletes' characteristics and medals won
+    # Generate bar chart for athltes' characteristics and medals won
     plot_ly(data, x = ~Range, y = ~Medals, type = 'bar', 
             text = ~Medals, textposition = 'auto', 
             marker = list(color = "#305f72")

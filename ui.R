@@ -42,49 +42,11 @@ main_page <- tabPanel(
   )
 )
 
-# Define content for the second page
-trait_page <- tabPanel(
-  "Traits", # label for the tab in the navbar
-  includeCSS("style_1.css"), 
-  div(id = "container",
-      # img(src = "logo.png", id = "logo"),
-      # Application title
-      titlePanel("Athelete Traits and Medals Won"), # Title of the app
-      
-      # Sidebar with a selectInput for the variable for analysis
-      sidebarLayout(
-        sidebarPanel(
-          selectInput( # Widget 1: Shape selections 
-            inputId = "sport",
-            label = "Sports",
-            selected = "Swimming",
-            choices = unique_sports
-          ),
-          selectInput( # Widget 1: Shape selections 
-            inputId = "trait",
-            label = "Traits",
-            selected = "Height",
-            choices = c("Age", "Height", "Weight")
-          )
-        ),
-        mainPanel(
-          plotlyOutput("chart") # reactive output provided by leaflet
-        )
-      ),
-      div(id = "content",
-          p("This bar chart helps to explore relationships between athletes' physical traits and medals won in different Olympic events. Though 
-            it is difficult to claim and justify causations with certainty for the given physical traits and Olympic games, this chart provides 
-            valuable insight into how a certain physical characteristic may have helped in athletes' performance in winning their Olympic medals.")
-      )
-  )
-)
-
 # Define content for the third page: Analysis of Number of Medal won by country
 countries <- tabPanel(
   "Countries", # label for the tab in the navbar
   includeCSS("style_1.css"),
   div(id = "container",
-    # img(src = "logo.png", id = "logo"),
     titlePanel("Country Participation Information and Medals Won"),
     
     h3("Total Number of Medals Won by Country from 1896 to 2016"),
@@ -141,7 +103,7 @@ countries <- tabPanel(
   )
 )
 
-# Define content for the fourth page
+# Define content for the third page
 athletes <- tabPanel(
   "Athletes",
   includeCSS("style_1.css"),
@@ -161,7 +123,44 @@ athletes <- tabPanel(
 )
 
 
-# Pass each page to a multi-page layout (`navbarPage`)
+# Define content for the fourth page
+trait_page <- tabPanel(
+  "Traits", # label for the tab in the navbar
+  includeCSS("style_1.css"), 
+  div(id = "container",
+      # img(src = "logo.png", id = "logo"),
+      # Application title
+      titlePanel("Athelete Traits and Medals Won"), # Title of the app
+      
+      # Sidebar with a selectInput for the variable for analysis
+      sidebarLayout(
+        sidebarPanel(
+          selectInput( # Widget 1: Sports selections 
+            inputId = "sport",
+            label = "Sports",
+            selected = "Swimming",
+            choices = unique_sports
+          ),
+          selectInput( # Widget 2: Athlete's trait selections 
+            inputId = "trait",
+            label = "Traits",
+            selected = "Height",
+            choices = c("Age", "Height", "Weight")
+          )
+        ),
+        mainPanel(
+          plotlyOutput("chart") # reactive output provided by leaflet
+        )
+      ),
+      div(id = "content",
+          p("This bar chart helps to explore relationships between athletes' physical traits and medals won in different Olympic events. Though 
+            it is difficult to claim and justify causations with certainty for the given physical traits and Olympic games, this chart provides 
+            valuable insight into how a certain physical characteristic may have helped in athletes' performance in winning their Olympic medals.")
+      )
+  )
+)
+
+
 ui <- fluidPage(
   includeCSS("style_1.css"),
   div(id = "mainHeader",
