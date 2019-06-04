@@ -65,6 +65,7 @@ my_server <- function(input, output) {
     min <- min(olympic_data[,trait])
     max <- max(olympic_data[,trait])
     
+    # Organizing data for bar chart
     data <- data.frame(
       Range = c(paste(min, "-", min + interval), paste(min + interval, "-", min + 2*interval), 
                 paste(min + 2*interval, "-", min + 3*interval),
@@ -91,7 +92,7 @@ my_server <- function(input, output) {
     } else {
       xTitle <- "Weight (kg)"
     }
-    
+    # Generate bar chart for athletes' characteristics and medals won
     plot_ly(data, x = ~Range, y = ~Medals, type = 'bar', 
             text = ~Medals, textposition = 'auto', 
             marker = list(color = "#305f72")
