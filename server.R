@@ -102,7 +102,6 @@ my_server <- function(input, output) {
                                                colors = c("#ADD8E6", "#ef3674")))
   })
   
-  
   # Generate a map that displays the total number of sports participated by each country.
   output$sports_map <- renderHighchart({
     sports_map <- hcmap('custom/world', data = sports_and_country_summary, 
@@ -113,25 +112,46 @@ my_server <- function(input, output) {
   
   # Generate a scatter plot that shows the number of sports paticipated and the number of medal won.
   output$sport_and_medal <- renderPlotly({
-    # Join "country_and_medals" and "sports_and_country" by country name
+    
+    # Join "country_and_medals" and "sports_and_country", and data of country and lines of records by country name
     sports_country_medal <- sports_and_country_summary
-    sports_country_medal$medals <- "0"
+    country_and_records <- data.frame(table(select(with_nonmedal_record, Team)))
+    sports_country_medal$medals <- 0
+    sports_country_medal$records <- 0
     for (i in 1:nrow(sports_country_medal)) {
       country_name <- as.character(sports_country_medal[i, 1])
       if(is.element(country_name, country_and_medals$Country)) {
         sports_country_medal[i, 3] <- country_and_medals[country_and_medals$Country == country_name,][[2]]
       }
+      country_name <- as.character(country_and_records[i, 1])
+      if(is.element(country_name, country_and_medals$Country)) {
+        sports_country_medal[i, 4] <- country_and_records[country_and_records$Var1 == country_name,][[2]]
+      }
     }
     sports_country_medal$medals <- as.numeric(sports_country_medal$medals)
-    colnames(sports_country_medal) <- c("Country", "Sports", "Medals")
+    sports_country_medal$records <- as.numeric(sports_country_medal$records)
+    colnames(sports_country_medal) <- c("Country", "Sports", "Medals", "Records")
     if (input$checkbox) {
+      
+      # The log version of the graph. Both medals and sports columns are in log scale. 0's in Medals column are still
+      # keep as 0's. The data of lines of records keep unchange.
       sports_country_medal$Sports <- log(sports_country_medal$Sports, 10)
       sports_country_medal$Medals <- log(sports_country_medal$Medals, 10)
       sports_country_medal$Medals <- replace(sports_country_medal$Medals, sports_country_medal$Medals == "-Inf", 0)
-    } 
-    sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country, 
-                               color = ~Medals, size = ~Medals, type = "scatter") %>% 
-      layout(title = "NUmber of Sports Versus Amount of Medals Won")
+      colnames(sports_country_medal) <- c("Country", "Sports", "Medals", "Records")
+      sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country,
+                                 type = "scatter", mode = "markers",
+                                 marker = list(colorbar = list(title = "Lines if records"), size = 10, 
+                                               color = ~Records, colorscale='Viridis', reversescale =T)) %>% 
+        layout(title = "NUmber of Sports Versus Amount of Medals Won in Log10", xaxis = list(title = "Sports in log10"),
+               yaxis = list(title = "Medals in log10"))
+    } else { 
+      sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country, 
+                                 type = "scatter", mode = "markers", 
+                                 marker = list(colorbar = list(title = "Lines of records"), size = 10, color = ~Records,
+                                               colorscale='Viridis', reversescale =T)) %>% 
+        layout(title = "Number of Sports Versus Amount of Medals Won")
+    }
   })
   
   # Generate a map that maps the number of medal won by each country.
