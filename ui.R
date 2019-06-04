@@ -75,7 +75,7 @@ trait_page <- tabPanel(
 )
 
 # Define content for the third page: Analysis of Number of Medal won by country
-page_three <- tabPanel(
+countries <- tabPanel(
   "Countries", # label for the tab in the navbar
   includeCSS("style_1.css"),
   div(id = "container",
@@ -139,7 +139,7 @@ page_three <- tabPanel(
 )
 
 # Define content for the fourth page
-page_four <- tabPanel(
+athletes <- tabPanel(
   "Athletes",
   includeCSS("style_1.css"),
   div(id = "container",
@@ -166,8 +166,8 @@ ui <- fluidPage(
   navbarPage(
     "GROUP WEE", # application title
     main_page,         # include the first page content
-    page_three,  # include the second page content
-    page_four,  # include the third page content
+    countries,  # include the second page content
+    athletes,  # include the third page content
     trait_page       # include the fourth page content
   )
 )
