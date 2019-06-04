@@ -103,7 +103,7 @@ my_server <- function(input, output) {
   # Generate a map that maps the total number of medal won by each country.
   output$overview_map <- renderHighchart({
     Overview_map <- hcmap('custom/world', data = country_and_medals, 
-                          name = paste0("The amount of medal won between ", start_year, " and ", end_year), 
+                          name = paste0("The number of medals won between ", start_year, " and ", end_year), 
                           value = "Freq", borderColor = "black", joinBy = c("name", "Country")) %>%
       hc_colorAxis(dataClasses = color_classes(c(0, 10, 50, 100, 500, 1000, 2000, 3000, 4000, 5000), 
                                                colors = c("#ADD8E6", "#ef3674")))
