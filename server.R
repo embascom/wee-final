@@ -3,6 +3,7 @@ library(dplyr)
 library(plotly)
 library(ggplot2)
 library(highcharter)
+library(DT)
 
 original_data <- read.csv("data/olympic.csv", header = TRUE, stringsAsFactors = FALSE)
 
@@ -36,14 +37,10 @@ sports_and_country_summary <- data.frame(table(sports_and_country)) %>% filter(F
 sports_and_country_summary <- data.frame(table(sports_and_country_summary$Team))
 colnames(sports_and_country_summary) <- c("Country", "Freq")
 
-#filtered dataset for use in page 4
-###athlete_data <- select(olympic_data, Name) %>% distinct()
-###for (i in 0:nrow(athlete_data)) {
-  ###for (j in 0:nrow(olympic_data))  {
-    ###if (athlete_data$Name[i] == olympic_data)
-  ###}
-###}
-###View(athlete_data)
+# filtered dataset for use in Page 4
+olympic_table <- select(olympic_data, ID, Name, Sex, Age, Height, Team, Games, Sport, Event)
+
+
 
 my_server <- function(input, output) {
   data_reactive <- reactive({ 
@@ -177,8 +174,12 @@ my_server <- function(input, output) {
   })
   
   # Generate the table to look up athletes in
-  data2 = olympic_data[sample(nrow(olympic_data), 5177), ]
-  output$mytable1 <- renderDataTable({
-    datatable(data2[, input$show_vars, drop = FALSE])
+  output$table <- DT::renderDataTable({
+    DT::datatable(olympic_table[, input$show_vars, drop = FALSE], options = list(
+      initComplete = JS(
+        "function(settings, json) {",
+        "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
+        "}")
+    ))
   })
 }

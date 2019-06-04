@@ -2,12 +2,14 @@ library(shiny)
 library(dplyr)
 library(plotly)
 library(highcharter)
+library(DT)
 
 olympic_data <- read.csv("data/olympic.csv", header = TRUE, stringsAsFactors = FALSE)
 olympic_data <- na.omit(olympic_data)
 filtered_data <- olympic_data[olympic_data$Sport != "Art Competitions" & olympic_data$Sport != "Lacrosse"
                               & olympic_data$Sport != "Golf", ]
 unique_sports <- select(filtered_data, Sport) %>% distinct()
+olympic_table <- select(olympic_data, ID, Name, Sex, Age, Height, Team, Games, Sport, Event)
 
 # Define the first page content
 main_page <- tabPanel(
@@ -85,7 +87,7 @@ page_three <- tabPanel(
     h3("Total Number of Medals Won by Country from 1896 to 2016"),
     highchartOutput("overview_map"),
     div(id = "content",
-        p("The Map displays the total number of medals won. From the graph, we know United States won the most medals(4357).
+        p("The Map displays the total number of medals won. From the graph, we know United States won the most medals (4357).
           The number of medal won is ranged from 0 to 4357. There is a huge difference between the number of medals won in 
           differenct countried. One possible guess is that some countries are participating in more sports than other countries.
           Also, some countries might join Olympic game later than other countries.Let's examine the realtionship between the 
@@ -109,7 +111,7 @@ page_three <- tabPanel(
     checkboxInput("checkbox", label = "Log version"),
     plotlyOutput("sport_and_medal"),
     div(id = "content",
-        p("The above graph demonstrated the relationship between the number of sports a given country participates in and how
+        p("The above graph demonstrates the relationship between the number of sports a given country has participated in and how
           many medals they have won.")
         ),
     
@@ -126,14 +128,11 @@ page_three <- tabPanel(
       ),
 
       mainPanel(
-        highchartOutput("map")
+        highchartOutput("map"),
+        div(id = "content",
+            p("The above graph shows the number of medals each country has won in a given sport.")
+        )
       )
-    ),
-    div(id = "content",
-        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
     )
   )
 )
@@ -143,18 +142,23 @@ page_four <- tabPanel(
   "Athletes",
   includeCSS("style_1.css"),
   div(id = "container",
-      titlePanel("Athlete Information"),
-      h3("Athlete Information"),
-      dataTableOutput("mytable1"),
-      div(id = "content",
-          h2("Description and Analysis"),
-          p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      titlePanel("Athlete Entry Information"),
+      sidebarPanel(
+        checkboxGroupInput("show_vars", "Columns to show:", names(olympic_table), selected = names(olympic_table))
+      ),
+      mainPanel(
+        div(id = "content",
+            h2("Description and Analysis"),
+            p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+              occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+            ),
+        DT::dataTableOutput("table")
       )
-  )
+    )
 )
+
 
 # Pass each page to a multi-page layout (`navbarPage`)
 ui <- fluidPage(
