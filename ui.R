@@ -100,6 +100,12 @@ page_three <- tabPanel(
     
 
     h3("Relationship Between Sports and Medals Won"),
+    div(id = "content",
+        p("Check the box below to see the scatter plot using the log10 version of the sports participated in and the medals
+          won. Uncheck the box below to see the scatter plot of the unchanged version. The color in the graph indicates how 
+          many lines of records we have."),
+        p("Be careful, 0's will not be changed by the log version graph, and they will still display as 0's.")
+    ),
     checkboxInput("checkbox", label = "Log version"),
     plotlyOutput("sport_and_medal"),
     div(id = "content",
