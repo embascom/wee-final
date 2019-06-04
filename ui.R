@@ -30,7 +30,7 @@ main_page <- tabPanel(
         get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results")),
       h2("Visualizations"),
       p("Countries: This page displays the the number of medals won by each country. *takes time to load*", br(),
-      "Athletes:",br(), 
+      "Athletes: This page contains all of the individual entries for every Olympic Games.",br(), 
       "Traits: This page explores the relationship between atheletes' traits and the total number of medals won.")
     )    
   )
