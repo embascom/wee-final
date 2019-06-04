@@ -137,9 +137,9 @@ my_server <- function(input, output) {
         sports_country_medal[i, 4] <- country_and_records[country_and_records$Var1 == country_name,][[2]]
       }
     }
-    sports_country_medal$medals <- as.numeric(sports_country_medal$medals)
-    sports_country_medal$records <- as.numeric(sports_country_medal$records)
     colnames(sports_country_medal) <- c("Country", "Sports", "Medals", "Records")
+    sports_country_medal$medals <- as.numeric(sports_country_medal$Medals)
+    sports_country_medal$records <- as.numeric(sports_country_medal$Records)
     if (input$checkbox) {
       
       # The log version of the graph. Both medals and sports columns are in log scale. 0's in Medals column are still
@@ -150,11 +150,12 @@ my_server <- function(input, output) {
       colnames(sports_country_medal) <- c("Country", "Sports", "Medals", "Records")
       sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country,
                                  type = "scatter", mode = "markers",
-                                 marker = list(colorbar = list(title = "Lines if records"), size = 10, 
+                                 marker = list(colorbar = list(title = "Lines of records"), size = 10, 
                                                color = ~Records, colorscale='Viridis', reversescale =T)) %>% 
         layout(title = "NUmber of Sports Versus Amount of Medals Won in Log10", xaxis = list(title = "Sports in log10"),
                yaxis = list(title = "Medals in log10"))
     } else { 
+      colnames(sports_country_medal) <- c("Country", "Sports", "Medals", "Records")
       sport_and_medal <- plot_ly(data = sports_country_medal, x = ~Sports, y = ~Medals, text = ~Country, 
                                  type = "scatter", mode = "markers", 
                                  marker = list(colorbar = list(title = "Lines of records"), size = 10, color = ~Records,
