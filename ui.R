@@ -19,11 +19,14 @@ main_page <- tabPanel(
     div(id = "content",
       h2("Project Authors"),
       p("Wei Fan, Emily Bascom, Eric Kim"),
+      h2("The Olympic Games"),
+      p("The Olympic Games are leading international sporting events featuring summer and winter sports competitions in which 
+        thousands of athletes from around the world participate in a variety of competitions. The Olympics are held every four 
+        years with the summer and winter games alternating by occuring every four years but two years apart. Their creation was 
+        inspired by the ancient Olympics Games, which were held in Olympia, Greece, from the 8th century BC to the 4th century 
+        AD."),
       h2("Project Description"),
-      p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+      p(""),
       h2("Dataset"),
       p("The dataset that was used for this project contains information about all the athletes and results from the 
         1896 Athens to 2016 Rio Olympic games. The data was collected by Randi H. Griffin, a data scientist and a lecturer at the 
@@ -148,11 +151,8 @@ athletes <- tabPanel(
       ),
       mainPanel(
         div(id = "content",
-            h2("Description and Analysis"),
-            p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+            h2("Description"),
+            p("The following table ")
             ),
         DT::dataTableOutput("table")
       )
