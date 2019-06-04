@@ -5,13 +5,25 @@ body {
   height: 100%;
 }
 
+p {
+  margin-top: 5px;
+  font-family: 'Dosis', sans-serif;
+}
+
 h2 {
+  font-family: 'Dosis', sans-serif;
+  color: #0a0708;
+  font-size: 25px;
+  text-align: center;
+  margin: 15px;
+  margin-bottom: 30px;
+}
+
+h3 {
   font-family: 'Dosis', sans-serif;
   color: #0a0708;
   font-size: 20px;
   text-align: center;
-  margin: 15px;
-  margin-bottom: 30px;
 }
 
 #message {
