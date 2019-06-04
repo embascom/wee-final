@@ -36,6 +36,15 @@ sports_and_country_summary <- data.frame(table(sports_and_country)) %>% filter(F
 sports_and_country_summary <- data.frame(table(sports_and_country_summary$Team))
 colnames(sports_and_country_summary) <- c("Country", "Freq")
 
+#filtered dataset for use in page 4
+###athlete_data <- select(olympic_data, Name) %>% distinct()
+###for (i in 0:nrow(athlete_data)) {
+  ###for (j in 0:nrow(olympic_data))  {
+    ###if (athlete_data$Name[i] == olympic_data)
+  ###}
+###}
+###View(athlete_data)
+
 my_server <- function(input, output) {
   data_reactive <- reactive({ 
     olympic_data %>% filter(Sport == input$sport) 
@@ -165,5 +174,11 @@ my_server <- function(input, output) {
                      value = "Freq", borderColor = "black", joinBy = c("name", "Country")) %>%
       hc_colorAxis(dataClasses = color_classes(c(seq(0, max(table$Freq), by = max(table$Freq)/5)),
                                                colors = c("#ADD8E6", "#0000ff")))
+  })
+  
+  # Generate the table to look up athletes in
+  data2 = olympic_data[sample(nrow(olympic_data), 5177), ]
+  output$mytable1 <- renderDataTable({
+    datatable(data2[, input$show_vars, drop = FALSE])
   })
 }
