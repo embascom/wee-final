@@ -128,11 +128,11 @@ countries <- tabPanel(
       ),
 
       mainPanel(
-        highchartOutput("map"),
-        div(id = "content",
-            p("The above graph shows the number of medals each country has won in a given sport.")
-        )
+        highchartOutput("map")
       )
+    ),
+    div(id = "content",
+        p("The above graph shows the number of medals each country has won in a given sport.")
     )
   )
 )
