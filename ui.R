@@ -55,7 +55,7 @@ countries <- tabPanel(
   includeCSS("www/style_1.css"),
   div(id = "container",
     titlePanel("Country Participation Information and Medals Won"),
-    
+    tags$script(src = "https://code.highcharts.com/mapdata/custom/world.js"), #Get World Map data
     h3("Total Number of Medals Won by Country from 1896 to 2016"),
     highchartOutput("overview_map"),
     div(id = "content",

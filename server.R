@@ -104,16 +104,16 @@ my_server <- function(input, output) {
   output$overview_map <- renderHighchart({
     Overview_map <- hcmap('custom/world', data = country_and_medals, 
                           name = paste0("Number of Medals Won Between ", start_year, " and ", end_year), 
-                          value = "Freq", borderColor = "black", joinBy = c("name", "Country")) %>%
+                          value = "Freq", borderColor = "black", joinBy = c("name", "Country"), download_map_data = FALSE) %>%
       hc_colorAxis(dataClasses = color_classes(c(0, 10, 50, 100, 500, 1000, 2000, 3000, 4000, 5000), 
                                                colors = c("#ADD8E6", "#ef3674")))
   })
   
   # Generate a map that displays the total number of sports participated by each country.
   output$sports_map <- renderHighchart({
-    sports_map <- hcmap('custom/world', data = sports_and_country_summary, 
+    sports_map <- hcmap('custom/world.js', data = sports_and_country_summary, 
                         name = "Number of Events Participated in by Country", value = "Freq",
-                        borderColor = "black", joinBy = c("name", "Country")) %>% 
+                        borderColor = "black", joinBy = c("name", "Country"), download_map_data = FALSE) %>% 
       hc_colorAxis(dataClasses = color_classes(seq(0, 60, by = 10),colors = c("#ADD8E6", "#ef3674")))
   })
   
@@ -167,9 +167,9 @@ my_server <- function(input, output) {
     data_for_the_sport <- olympic_data %>% filter(Sport == input$sports) %>% select(Team)
     table <- data.frame(table(data_for_the_sport$Team))
     colnames(table) <- c("Country", "Freq")
-    map_viz <- hcmap('custom/world', data = table,
+    map_viz <- hcmap('custom/world.js', data = table,
                      name = paste0("Number of Medal for ", input$sports),
-                     value = "Freq", borderColor = "black", joinBy = c("name", "Country")) %>%
+                     value = "Freq", borderColor = "black", joinBy = c("name", "Country"), download_map_data = FALSE) %>%
       hc_colorAxis(dataClasses = color_classes(c(seq(0, max(table$Freq), by = max(table$Freq)/5)),
                                                colors = c("#ADD8E6", "#0000ff")))
   })
