@@ -5,7 +5,7 @@ The Olympic Games are leading international sporting events featuring summer and
 
 # Project Description
 
-This project provides a visual summary of all Olympic events and discusses various relationships between the characteristics of athletes and the number of medals they win. You can access the final project [here]().
+This project provides a visual summary of all Olympic events and discusses various relationships between the characteristics of athletes and the number of medals they win. By interacting with the app, users will be able to figure out which feature of the athletes tends to impact the number of medals they win. You can access the final project [here]().
 
 
 # Dataset
@@ -26,14 +26,14 @@ The dataset that was used for this project contains information about all the at
 12.	City - The city the games took place in 
 13.	Sport - The sport in which the athlete participated in 
 14.	Event - The event in which the athlete participated in
-15.	Medal - Whether the athlete got a gold, silver, bronze or no medal
+15.	Medal - Whether the athlete got a gold, silver, bronze or no medal <br>
 
 
 # Pages
-
-Countries: This page displays the the number of medals won by each country. <br>
-Athletes: This page contains all of the individual entries for every Olympic Games. <br> 
-Traits: This page explores the relationship between atheletes' traits and the total number of medals won.
+**Main Page**: This page displays the description of the project. <br>
+**Countries**: This page displays the the number of medals won by each country. <br>
+**Athletes**: This page contains all of the individual entries for every Olympic Games. <br> 
+**Traits**: This page explores the relationship between atheletes' traits and the total number of medals won.
 
 # Project Authors
 
