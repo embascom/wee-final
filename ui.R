@@ -52,24 +52,24 @@ countries <- tabPanel(
     h3("Total Number of Medals Won by Country from 1896 to 2016"),
     highchartOutput("overview_map"),
     div(id = "content",
-        p("This map displays the total number of medals won by each country. From the graph, we know the United States won the most medals (4357).
+        p("This map displays the total number of medals won by each country. From the graph, we know the United States has won the most medals (4357).
           The number of medal won is ranged from 0 to 4357. There is a huge difference between the number of medals won in different countries. 
           Some possible explanations for why this is is that some countries are participating in more sports than in other countries, some countries 
           begin participating in the Olympic game later than in other countries, and many countries may not have the resources to train for certain 
           events. Let's examine the relationship between the number of medals won and the number of sports the country participated in.")
         ),
     
-    h3("Number of Sports Participated in by Country"),
+    h3("Number of Olympic Events Participated in by Country"),
     highchartOutput("sports_map"),
     div(id = "content",
         p("From the graph above, it can be determind that countries that have won more medals tend to have participated in more Olympic 
-          events. However, participating in more sports does not guarantee more medals won. ")
+          events. However, participating in more events does not guarantee more medals won. ")
     ),
     
 
-    h3("Relationship Between Sports and Medals Won"),
+    h3("Relationship Between the Number of Events Participated In and Medals Won"),
     div(id = "content",
-        p("Check the box below to see the scatter plot using the log10 version of the sports participated in and the medals
+        p("Check the box below to see the scatter plot using the log10 version of the events participated in and the medals
           won. Uncheck the box below to see the scatter plot of the unchanged version. The color in the graph indicates how 
           many lines of records we have."),
         p("Be careful, 0's will not be changed by the log version graph, and they will still display as 0's.")
@@ -77,19 +77,19 @@ countries <- tabPanel(
     checkboxInput("checkbox", label = "Log version"),
     plotlyOutput("sport_and_medal"),
     div(id = "content",
-        p("The above graph demonstrates the relationship between the number of sports a given country has participated in and how
+        p("The above graph demonstrates the relationship between the number of events a given country has participated in and how
           many medals they have won.")
         ),
     
-    h3("Number of Medal Won by Sport"),
+    h3("Number of Medal Won by Olympic Event"),
     sidebarLayout(
       sidebarPanel(
         selectInput("sports",
-                    label = h3("Select a Sport:"),
+                    label = h3("Select an Event:"),
                     choices = unique(filtered_data$Sport)
         ),
         div(id = "note", # Adding Note
-            p("The map displays the number of medals won by countries for the sport selected.")
+            p("The map displays the number of medals won by countries for the event selected.")
         )
       ),
 
@@ -98,7 +98,7 @@ countries <- tabPanel(
       )
     ),
     div(id = "content",
-        p("The above graph shows the number of medals each country has won in a given sport.")
+        p("The above graph shows the number of medals each country has won in a given event.", br())
     )
   )
 )
@@ -135,7 +135,7 @@ trait_page <- tabPanel(
         sidebarPanel(
           selectInput( # Widget 1: Sports selections 
             inputId = "sport",
-            label = "Sports",
+            label = "Events",
             selected = "Swimming",
             choices = unique_sports
           ),
@@ -152,7 +152,7 @@ trait_page <- tabPanel(
       ),
       div(id = "content",
           p("This bar chart helps to explore relationships between athletes' physical traits and medals won in different Olympic events. Though 
-            it is difficult to claim and justify causations with certainty for the given physical traits and Olympic games, this chart provides 
+            it is difficult to claim and justify causations with certainty for the given physical traits and winning Olympic events, this chart provides 
             valuable insight into how a certain physical characteristic may have helped in athletes' performance in winning their Olympic medals.")
       )
   )

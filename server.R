@@ -103,7 +103,7 @@ my_server <- function(input, output) {
   # Generate a map that maps the total number of medal won by each country.
   output$overview_map <- renderHighchart({
     Overview_map <- hcmap('custom/world', data = country_and_medals, 
-                          name = paste0("The number of medals won between ", start_year, " and ", end_year), 
+                          name = paste0("Number of Medals Won Between ", start_year, " and ", end_year), 
                           value = "Freq", borderColor = "black", joinBy = c("name", "Country")) %>%
       hc_colorAxis(dataClasses = color_classes(c(0, 10, 50, 100, 500, 1000, 2000, 3000, 4000, 5000), 
                                                colors = c("#ADD8E6", "#ef3674")))
@@ -112,7 +112,7 @@ my_server <- function(input, output) {
   # Generate a map that displays the total number of sports participated by each country.
   output$sports_map <- renderHighchart({
     sports_map <- hcmap('custom/world', data = sports_and_country_summary, 
-                        name = "Number of sports' types participated by each country", value = "Freq",
+                        name = "Number of Events Participated in by Country", value = "Freq",
                         borderColor = "black", joinBy = c("name", "Country")) %>% 
       hc_colorAxis(dataClasses = color_classes(seq(0, 60, by = 10),colors = c("#ADD8E6", "#ef3674")))
   })
@@ -150,7 +150,7 @@ my_server <- function(input, output) {
                                  type = "scatter", mode = "markers",
                                  marker = list(colorbar = list(title = "Lines of records"), size = 10, 
                                                color = ~Records, colorscale='Viridis', reversescale =T)) %>% 
-        layout(title = "NUmber of Sports Versus Amount of Medals Won in Log10", xaxis = list(title = "Sports in log10"),
+        layout(title = "NUmber of Events Versus Amount of Medals Won in Log10", xaxis = list(title = "Events in log10"),
                yaxis = list(title = "Medals in log10"))
     } else { 
       colnames(sports_country_medal) <- c("Country", "Sports", "Medals", "Records")
@@ -158,7 +158,7 @@ my_server <- function(input, output) {
                                  type = "scatter", mode = "markers", 
                                  marker = list(colorbar = list(title = "Lines of records"), size = 10, color = ~Records,
                                                colorscale='Viridis', reversescale =T)) %>% 
-        layout(title = "Number of Sports Versus Amount of Medals Won")
+        layout(title = "Number of Olympic Events Versus Amount of Medals Won")
     }
   })
   
