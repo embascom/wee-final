@@ -14,7 +14,7 @@ olympic_table <- select(olympic_data, ID, Name, Sex, Age, Height, Team, Games, S
 # Define the first page content
 main_page <- tabPanel(
   "Main", # label for the tab in the navbar
-  includeCSS("style_1.css"), 
+  includeCSS("www/style_1.css"), 
   div(id = "container",
     div(id = "content",
       h2("Project Authors"),
@@ -45,7 +45,7 @@ main_page <- tabPanel(
 # Define content for the third page: Analysis of Number of Medal won by country
 countries <- tabPanel(
   "Countries", # label for the tab in the navbar
-  includeCSS("style_1.css"),
+  includeCSS("www/style_1.css"),
   div(id = "container",
     titlePanel("Country Participation Information and Medals Won"),
     
@@ -106,7 +106,7 @@ countries <- tabPanel(
 # Define content for the third page
 athletes <- tabPanel(
   "Athletes",
-  includeCSS("style_1.css"),
+  includeCSS("www/style_1.css"),
   div(id = "container",
       titlePanel("Athlete Entry Information"),
       sidebarPanel(
@@ -126,10 +126,8 @@ athletes <- tabPanel(
 # Define content for the fourth page
 trait_page <- tabPanel(
   "Traits", # label for the tab in the navbar
-  includeCSS("style_1.css"), 
+  includeCSS("www/style_1.css"), 
   div(id = "container",
-      # img(src = "logo.png", id = "logo"),
-      # Application title
       titlePanel("Athelete Traits and Medals Won"), # Title of the app
       
       # Sidebar with a selectInput for the variable for analysis
@@ -162,7 +160,7 @@ trait_page <- tabPanel(
 
 
 ui <- fluidPage(
-  includeCSS("style_1.css"),
+  includeCSS("www/style_1.css"),
   div(id = "mainHeader",
     img(src = "logo.png", id = "logo"),
     titlePanel("THE OLYMPIC GAMES") # show with a displayed title
