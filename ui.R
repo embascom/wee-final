@@ -18,26 +18,33 @@ main_page <- tabPanel(
   div(id = "container",
     div(id = "content",
       h2("Project Authors"),
-      p("Wei Fan, Emily Bascom, Eric Kim"),
+      p("Wei Fan, Emily Bascom, Eric Kim", br(), br()),
       h2("The Olympic Games"),
       p("The Olympic Games are leading international sporting events featuring summer and winter sports competitions in which 
         thousands of athletes from around the world participate in a variety of competitions. The Olympics are held every four 
         years with the summer and winter games alternating by occurring every four years but two years apart. Their creation was 
         inspired by the ancient Olympics Games, which were held in Olympia, Greece, from the 8th century BC to the 4th century 
-        AD."),
+        AD.", br(), br()),
       h2("Project Description"),
       p("In this project summaries the various relationships between the characteristics of athletes and the number of medals they 
-        win."),
+        win. In the 'Countries' page, there are visualizations that demonstrate the total number of medals won by each country from 
+        1896 to 2016, the number of Olympic events each country has participated in, the relationship between the number of events 
+        each country has participated in and the total number of medals each country has won, and finally the number of medals each 
+        country has won in each Olympic event. The 'Athletes' page contains a data table with each individual entry for every event 
+        from 1896 to 2016. Finally, the 'Traits' page contains an interactive histogram that demonstrates the number of medals won 
+        given an Olympic event and a physical characteristic of the athletes that participate in that event, such as age, height, 
+        and weight.", br(), br()),
       h2("Dataset"),
       p("The dataset that was used for this project contains information about all the athletes and results from the 
         1896 Athens to 2016 Rio Olympic games. The data was collected by Randi H. Griffin, a data scientist and a lecturer at the 
         Northeastern University. He scraped historical Olympic records from sports-reference.com, a company based in Pennsylvania, 
         that delivers sports statistics. Their primary data providers are Gracenote, Sportradar, and Delta Sports Group. You can
-        get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results")),
+        get the dataset ", a("here.", href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results"), 
+        br(), br()),
       h2("Visualizations"),
       p("Countries: This page displays the the number of medals won by each country. *takes time to load*", br(),
       "Athletes: This page contains all of the individual entries for every Olympic Games.",br(), 
-      "Traits: This page explores the relationship between atheletes' traits and the total number of medals won.")
+      "Traits: This page explores the relationship between atheletes' traits and the total number of medals won.", br(), br())
     )    
   )
 )
@@ -115,7 +122,9 @@ athletes <- tabPanel(
       mainPanel(
         div(id = "content",
             h2("Description"),
-            p("The following table ")
+            p("The following table contains the individual data for every athlete for every Olympic event from the 1896 Athens Games to the 2016 Rio Games.
+              The box on the left can be used to filter what is shown in the table. Unselecting a checked box will hide that column in the table. The Search 
+              box can be used to look up specific athletes by name, athlete characteristics, and events. ")
             ),
         DT::dataTableOutput("table")
       )
