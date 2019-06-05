@@ -1,7 +1,3 @@
-library(shiny)
-library(dplyr)
-library(plotly)  
-
 source("ui.R")
 source("server.R")
 
